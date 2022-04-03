@@ -2,7 +2,7 @@
 
 import pyttsx3, sys, os, pathlib, PyPDF2, time
 
-sys.path.append('C://Users//vebha//Desktop//E-books//Personal growth')
+sys.path.append('C://Users//Username//Desktop//E-books')
 
 engine = pyttsx3.init() # object creation
 
@@ -21,8 +21,8 @@ voices = engine.getProperty('voices')       #getting details of current voice
 engine.setProperty('voice', voices[1].id)   #changing index, changes voices. 1 for female
 
 
-for filename in os.listdir('C://Users//vebha//Desktop//E-books//Personal growth'):
-    os.chdir('C://Users//vebha//Desktop//E-books//Personal growth')
+for filename in os.listdir('C://Users//Username//Desktop//E-books'):
+    os.chdir('C://Users//Username//Desktop//E-books')
     path = open(filename, 'rb')
     pdfReader = PyPDF2.PdfFileReader(path)
     Numberofpages = pdfReader.getNumPages()
@@ -32,9 +32,11 @@ for filename in os.listdir('C://Users//vebha//Desktop//E-books//Personal growth'
         page = pdfReader.getPage(i-1)
         text = page.extractText()
         TotalText = TotalText + text
+        print("Parsing data:")
         print("Page {i} of {NumberOfPages}".format(i=i, NumberOfPages=Numberofpages))
 
-    os.chdir('C://Users//vebha//Downloads//Audiobooks')
+    os.chdir('C://Users//Username//Downloads//Audiobooks')
+    print("Making audiobook, please wait")
     engine.save_to_file(TotalText, str(filename)+'.mp3')
     engine.runAndWait()
     print("Done")
